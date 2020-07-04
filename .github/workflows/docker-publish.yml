@@ -13,10 +13,6 @@ on:
   # Run tests for any PRs.
   pull_request:
 
-env:
-  # TODO: Change variable to your image's name.
-  IMAGE_NAME: opencv-dotnet-runtime-deps
-
 jobs:
   # Push image to GitHub Packages.
   # See also https://docs.docker.com/docker-hub/builds/
@@ -33,7 +29,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          repository: raimondb/${{ IMAGE_NAME }}
+          repository: raimondb/opencv-dotnet-runtime-deps
           tag_with_ref: true
-          push: ${{ startsWith(github.ref, 'refs/tags/') }}
+#          push: ${{ startsWith(github.ref, 'refs/tags/') }}
 
