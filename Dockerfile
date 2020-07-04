@@ -1,5 +1,9 @@
 FROM mcr.microsoft.com/dotnet/core/runtime-deps:3.1-bionic AS base
-WORKDIR /app
-COPY ["install-opencv-min-deps.sh", "/app"]
-RUN chmod +x /app/install-opencv-min-deps.sh
-RUN /app/install-opencv-min-deps.sh
+RUN apt-get update && apt-get install -y \
+    libgtk2.0-0 \
+	libtesseract4 \
+	libdc1394-22 \
+	libavformat57 \
+	libswscale4 \
+	libopenexr22 \
+ && rm -rf /var/lib/apt/lists/*
