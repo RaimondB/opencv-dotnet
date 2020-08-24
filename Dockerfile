@@ -1,5 +1,6 @@
 FROM mcr.microsoft.com/dotnet/core/runtime-deps:3.1.7-bionic AS base
 RUN apt-get update && apt-get install -y \
+    curl \
     libgtk2.0-0 \
 	libtesseract4 \
 	libdc1394-22 \
