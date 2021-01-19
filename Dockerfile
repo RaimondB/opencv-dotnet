@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/core/runtime-deps:3.1.9-bionic AS base
+FROM mcr.microsoft.com/dotnet/runtime-deps:3.1.11-bionic-arm64v8 AS base
 RUN apt-get update && apt-get install -y \
     libgtk2.0-0 \
 	libtesseract4 \
