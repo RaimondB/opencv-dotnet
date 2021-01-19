@@ -1,0 +1,35 @@
+{
+    "name": "opencv-dotnet-runtime-deps",
+    "version": "1.0.0",
+    "description": "OpenCV Sharp base image for .NET Core 3.1",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/RaimondB/opencv-dotnet.git"
+    },
+    "author": "Raimond Brookman",
+    "license": "GPL-3.0-or-later",
+    "bugs": {
+      "url": "https://github.com/RaimondB/opencv-dotnet/issues"
+    },
+    "homepage": "https://github.com/RaimondB/opencv-dotnet#readme",
+    "devDependencies": {
+      "@semantic-release/commit-analyzer": "^8.0.1",
+      "@semantic-release/git": "^9.0.0",
+      "semantic-release": "^17.2.3",
+      "semantic-release-docker": "^2.2.0"
+    },
+    "release": {
+      "plugins": [
+        "@semantic-release/commit-analyzer",
+        "@semantic-release/git",
+        "semantic-release-docker"
+      ],
+      "publish": [
+        {
+          "path": "semantic-release-docker",
+          "name": "raimondB/opencv-dotnet-runtime-deps"
+        }
+      ]
+    }
+  }
+  

@@ -1,0 +1,27 @@
+version: "~> 1.0"
+language: ruby
+services:
+- docker
+stages:
+- build
+- name: deploy
+  if: branch = master
+jobs:
+  include:
+  - stage: build
+    name: Build
+    script:
+    - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
+    - docker build .
+  - stage: deploy
+    script:
+    - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
+    - nvm install v12.0.0
+    - docker build . -t raimondb/opencv-dotnet-runtime-deps
+    - npm install -g npm
+    - npm install
+    - npx semantic-release
+env:
+  global:
+  - secure: Fr4dK+MfF5bSs5Ozjj2+JSUiqMpm6+oF6IFgUlUFV8J2fJDwpFTjjOy93caM2YE/lvKd8rnqappSKUiARfBa1fkfOBeQVdvjOL5zx5NRRyXWSUOYPjyhJwL/LhiGWwIDETNO+7ITrl/ydx5b/N7Mbrrw0s1vEj5xl56fMl6/YBVt9db+0sKmkamV0LN/a4R3WXn7Cmm39Ei1K0LXEDVwKasBDwNa6hbE4MgGR5moCkRdm+/51c7xYGjbYi1t7LjhHKH8NKjLhCtH3ptObVoISlQusTXCTKLkKxqU8FdLZDl7yhcqSTPuOS+w1scjEjcG683+TtUsHVZ9DPFsoie+38UBYgFXr7NcPZ6YENZ/dpoJtly7BBhpKxe+dcCumKJ88BHl4kCIcDmYQV62kWWPIF5vBpkPUFFRhfPfXEri2Iw1qFl3AWk4AguyaPc7BqyTgLJr6Q+fwGKkJzV9aC4ZIbrGrCvDUcTffS/6z8t0ZjzVBGjRkhe1GiecN6lVms4fbOO7RDKrcjkTlPnd8EfCJ3ORA0oZ95GYIfmusQhqO/+effBlnArG/TIAIaKctbAOjB9oJKPu4r8FwCvsfFyoKyDtldJGs2+8PYcX0nlApXhmtLFId9jgz+/aiKu9xNtJpet16aN8HtFGUse8hvNrYmdT4xJO09S1/OqXFhQVxFQ=
+  - secure: g3bO5BvSxdUXm31/bxZK2+OMv7qgN1rZQuSG6UXOqoHtJbqrtIG8QZqKH+0iOAoCl78TKUyCavJ/19f+EVwAUgIBIbpYy0qb/m2LqR/fWgRLQBGNxohoVYzmTggZTfo6WwK3gQ/ylfRO+h2tLAoDXOJRsmetH3jRhPypv1B3GenTDlVSoYWWkLu1pdqLorCbuA1OnAQ8afwOmdqEASPUXOINvQ5ROfyxAJ65MP/hJ2ZbY/wVSCDsdp7LwkH1relHEzCUG2mJrWoy1zbLQrBxjY0OoV+eNfnZJX1xzyqDsruxp65qi/ZpMFhSrjEqLt16ueBeuwA5+fEXoESkL2RTNH4sy/9RkohflOEfEkhFEEQlD0Et50uw59XhZNGbOc0UxIPYVvekuZtJZefXVvZDPyaDkiUfw090zYmTTKanmS7pJsYNdnqq3T/I5Kl9Yq+cq06T8KLIFAHEEVdfSzFvI7NJKZFFqNlyygRkmI7/1osTzF0J4Mr7wjcJCPrhD1Bqvkx4d4QRoTyz+vbiu9iRh0OI/cR0t9AuE347I2Kzsk5wArVoyMRCrl32WSFUIIVIp/501EzWLlbZY7yD+N/Fasrs+zti2oaPRdMBKT2oa9x0CInMO1cucmSjIKTdlorSWohBWalrjhwGXb+KFxmiz24y03N7/7PJwDfVxIcvuLM=
