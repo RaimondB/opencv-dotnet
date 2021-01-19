@@ -27,7 +27,7 @@
       "publish": [
         {
           "path": "semantic-release-docker",
-          "name": "raimondB/opencv-dotnet-runtime-deps"
+          "name": "raimondb/opencv-dotnet-runtime-deps"
         }
       ]
     }
