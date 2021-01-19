@@ -14,11 +14,11 @@ jobs:
   - stage: build
     name: Build
     script:
-    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
     - docker build .
   - stage: deploy
     script:
-    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
     - nvm install v12.0.0
     - docker build . -t raimondb/opencv-dotnet-runtime-deps
     - npm install -g npm
