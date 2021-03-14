@@ -15,18 +15,18 @@
   "devDependencies": {
     "@semantic-release/commit-analyzer": "^8.0.1",
     "@semantic-release/git": "^9.0.0",
-    "semantic-release": "^17.2.3",
-    "semantic-release-docker": "^2.2.0"
+    "semantic-release": "^17.4.2",
+    "@eclass/semantic-release-docker": "^1.0.6"
   },
   "release": {
     "plugins": [
       "@semantic-release/commit-analyzer",
       "@semantic-release/git",
-      "semantic-release-docker"
+      "@eclass/semantic-release-docker"
     ],
     "publish": [
       {
-        "path": "semantic-release-docker",
+        "path": "@eclass/semantic-release-docker",
         "name": "raimondb/opencv-dotnet-runtime-deps"
       }
     ]
