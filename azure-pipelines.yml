@@ -16,14 +16,8 @@ stages:
     pool:
       vmImage: ubuntu-latest
     steps:
-    - task: JavaToolInstaller@0
-      displayName: Ensure Java 11 
-      inputs: # make sure Java 11 is installed and pointed to by JAVA_HOME, since the Sonar Scanner requires this to run
-        versionSpec: '11'
-        jdkArchitectureOption: 'x64'
-        jdkSourceOption: 'PreInstalled'
     - task: Bash@3
-      displayName: Integration Tests
+      displayName: Build docker image
       inputs:
         targetType: 'inline'
         script: |
