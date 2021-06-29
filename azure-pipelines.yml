@@ -1,0 +1,55 @@
+trigger:
+- master
+
+pr:
+- master
+
+resources:
+- repo: self
+
+stages:
+- stage: Build
+  displayName: Build & QA
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: JavaToolInstaller@0
+      displayName: Ensure Java 11 
+      inputs: # make sure Java 11 is installed and pointed to by JAVA_HOME, since the Sonar Scanner requires this to run
+        versionSpec: '11'
+        jdkArchitectureOption: 'x64'
+        jdkSourceOption: 'PreInstalled'
+    - task: Bash@3
+      displayName: Integration Tests
+      inputs:
+        targetType: 'inline'
+        script: |
+          echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+          docker build .
+      env: #provide secrets this way to have them available as an environment variable in a secure way
+        DOCKER_PASSWORD: $(DOCKER_PASSWORD)
+- stage: Release
+  displayName: Release a new image on Dockerhub
+  condition:  and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  jobs:
+  - job: Build
+    displayName: Build Docker & Release to DockerHub
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: Npm@1
+      inputs: # Ensure that the semantic-release tool is installed as specified in the package.json
+        command: 'install'
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: |
+          echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+          docker build . -t raimondb/opencv-dotnet-runtime-deps
+          npx semantic-release
+      env:
+        GH_TOKEN: $(GH_TOKEN)
+        DOCKER_PASSWORD: $(DOCKER_PASSWORD)
