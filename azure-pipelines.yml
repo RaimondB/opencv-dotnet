@@ -10,6 +10,7 @@ resources:
 stages:
 - stage: Build
   displayName: Build & QA
+  condition:  and(succeeded(), neq(variables['Build.SourceBranch'], 'refs/heads/master'))
   jobs:
   - job: Build
     displayName: Build
@@ -42,8 +43,11 @@ stages:
         targetType: 'inline'
         script: |
           echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-          docker build . -t raimondb/opencv-dotnet-runtime-deps
+          docker build . -t opencv-dotnet-runtime-deps
           npx semantic-release
       env:
         GH_TOKEN: $(GH_TOKEN)
         DOCKER_PASSWORD: $(DOCKER_PASSWORD)
+        DOCKER_USERNAME: $(DOCKER_USERNAME)
+        DOCKER_REGISTRY_USER: $(DOCKER_USERNAME)
+        DOCKER_REGISTRY_PASSWORD: $(DOCKER_PASSWORD)
