@@ -22,7 +22,21 @@
     "plugins": [
       "@semantic-release/commit-analyzer",
       "@semantic-release/git",
-      "@eclass/semantic-release-docker"
+      [
+      "@eclass/semantic-release-docker",
+      {
+        "baseImageName": "opencv-dotnet-runtime-deps",
+        "registries": [
+          {
+            "url": "docker.io",
+            "imageName": "docker.io/raimondb/opencv-dotnet-runtime-deps",
+            "user": "DOCKER_USERNAME",
+            "password": "DOCKER_PASSWORD"
+          }
+        ],
+        "additionalTags": ["latest"]
+      }
+      ]      
     ],
     "publish": [
       {
