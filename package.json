@@ -39,12 +39,6 @@
           ]
         }
       ]
-    ],
-    "publish": [
-      {
-        "path": "@eclass/semantic-release-docker",
-        "name": "raimondb/opencv-dotnet-runtime-deps"
-      }
     ]
   }
 }
