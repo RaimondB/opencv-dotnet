@@ -10,7 +10,7 @@ resources:
 stages:
 - stage: Build
   displayName: Build & QA
-  condition:  and(succeeded(), neq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  condition:  and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
   jobs:
   - job: Build
     displayName: Build
