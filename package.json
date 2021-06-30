@@ -29,7 +29,9 @@
           "registries": [
             {
               "url": "docker.io",
-              "imageName": "docker.io/raimondb/opencv-dotnet-runtime-deps"
+              "imageName": "docker.io/raimondb/opencv-dotnet-runtime-deps",
+              "user": "DOCKER_REGISTRY_USER",
+              "password": "DOCKER_REGISTRY_PASSWORD"
             }
           ],
           "additionalTags": [
