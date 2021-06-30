@@ -6,6 +6,7 @@
     "type": "git",
     "url": "git+https://github.com/RaimondB/opencv-dotnet.git"
   },
+  
   "author": "Raimond Brookman",
   "license": "GPL-3.0-or-later",
   "bugs": {
