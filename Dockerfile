@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/aspnet:3.1.23-bionic AS base
+FROM mcr.microsoft.com/dotnet/aspnet:3.1.31-bionic AS base
 RUN apt-get update && apt-get install -y \
     libgtk2.0-0 \
 	libtesseract4 \
