@@ -4,6 +4,6 @@ Provides base image for OpenCVSharp dependencies.
 
 Targetted at:
 
-* Ubuntu 18
-* ASP .NET Core 3.1
-* OpenCV 4.5.x
+* Ubuntu 20.04
+* ASP .NET 6.0
+* OpenCV 4.7.x
