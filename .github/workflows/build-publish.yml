@@ -30,6 +30,7 @@ jobs:
 # https://nodered.org/docs/faq/node-versions#installing-nodejs
           node-version: 18
           registry-url: https://registry.npmjs.org/
+      - run: npm install
       - run: npx semantic-release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
